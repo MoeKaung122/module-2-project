@@ -1,0 +1,88 @@
+<!--================Header Area =================-->
+<style>
+  .user-circle {
+    width: 50px;
+    height: 50px;
+    background: #4e73df;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    justify-content: center;
+    color: white;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+</style>
+{% load static %}
+<header class="header_area">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <a class="navbar-brand logo_h" href="index.html">
+        <h1>HelloBooking.</h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+        <ul class="nav navbar-nav menu_nav ml-auto">
+          <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+          </li>
+
+          <li class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+            <a class="nav-link" href="/about/">About us</a>
+          </li>
+
+          
+           <li class="nav-item {% if request.resolver_match.url_name == 'blog' %}active{% endif %}">
+            <a class="nav-link" href="/blog/">blog</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+            <a class="nav-link" href="/contact/">Contact</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.url_name == 'my_bookings' %}active{% endif %}">
+            <a class="nav-link" href="/booking/">booking list</a>
+          </li>
+
+          {% if request.user.is_authenticated %}
+          <li class="nav-item submenu dropdown">
+            <a href="#" class="nav-link dropdown-toggle nav-item d-flex align-items-center mt-3" data-toggle="dropdown"
+              role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="user-circle mr-2">{{ request.user.username }}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <a class="nav-link" href="/logout/">Logout</a>
+              </li>
+            </ul>
+          </li>
+
+          {% else %}
+          <li class="nav-item submenu dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">
+              Login
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <a class="nav-link" href="/login/">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/register/"> Register</a>
+              </li>
+            </ul>
+          </li>
+
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!--================Header Area =================-->

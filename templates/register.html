@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+
+<body>
+
+
+
+    <div class="container d-flex justify-content-center align-items-center"
+        style="min-height: 100vh;  margin-left: 7rem; margin-right: 7rem;">
+        <div class=" d-flex flex-md-row flex-column align-items-center gap-5">
+
+            <div class="image text-center">
+                <img src="{% static 'image/Sign_up.png' %}" width="600px" height="600px" alt="">
+            </div>
+
+
+
+            <div class="form p-4 shadow-lg rounded-4" style="width: 500px; background: white;">
+                <h3 class="mb-4 text-center">Register</h3>
+
+                <form method="POST" action="/register/">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                        <div class="text-danger small mt-2">
+                            {{ form.username.errors }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        <div class="text-danger small mt-2">
+                            {{ form.email.errors }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.confirm_password.label_tag }}
+                        {{ form.confirm_password }}
+                    </div>
+                    <!-- <div class="mb-3">
+
+                        <input type="checkbox" name="" id="">
+                        <a href="">do have a acc </a>
+                    </div> -->
+                    <div class="mb-3 mx-auto text-center mt-3">
+                        <a href="/login/" class="text-center mx-auto"> you have an account? Login </a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+
+</html>

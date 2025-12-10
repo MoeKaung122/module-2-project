@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+
+<body>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+    <div class="container d-flex justify-content-center align-items-center"
+        style="min-height: 100vh; margin-left: 7rem; margin-right: 7rem; ">
+        <div class=" d-flex flex-md-row flex-column align-items-center gap-5">
+
+            <div class="image text-center">
+                <img src="{% static 'image/login.png' %}" width="600px" height="600px" alt="">
+            </div>
+
+
+
+            <div class="form p-4 shadow-lg rounded-4" style="width: 500px; background: white;">
+                <h3 class="mb-4 text-center">Login </h3>
+
+                <form method="POST" action="/login/">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">username </label>
+                        <input type="text" class="form-control" name="username" id="username"
+                            placeholder="Your username ">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Your Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+
+                    <div class="mb-3 mx-auto text-center mt-3">
+                        <a href="/register/" class="text-center mx-auto"> don't have an account? Register </a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+
+</html>
