@@ -62,7 +62,7 @@ def Logout(request):
 
 def Login(request):
     if request.method == "GET":
-        return render(request, "Login.html")
+        return render(request, "login.html")
 
     if request.method == "POST":
 
