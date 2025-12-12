@@ -118,6 +118,9 @@ def Hotel_Detail(request, id):
             guests=guests,
             total_price=total_price,
         )
+        if not room:
+           messages.error(request, "No rooms available for this type.")
+           return redirect(f"/booking/{Booking.id}/")    # or return redirect("booking_page")
 
         # Update room availability
         room.is_available = False
@@ -125,7 +128,7 @@ def Hotel_Detail(request, id):
         Booking.save()
         messages.success(request, "booking success")
 
-        return redirect("/")  # your success page
+        return redirect("/booking/")  # your success page
 
 @login_required(login_url="/login/")
 def my_bookings(request):
