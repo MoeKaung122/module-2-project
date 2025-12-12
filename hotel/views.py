@@ -100,11 +100,15 @@ def Hotel_Detail(request, id):
 
         room = models.Room.objects.filter(RoomType=room_type, is_available=True).first()
         if not room:
-            messages.error(request, "No rooms available for this type.")
+           messages.error(request, "No rooms available for this type.")
+           return redirect(f"/hotel/detail/{hotel.id}/")   # redirect back to same page
 
         d1 = datetime.strptime(check_in, "%Y-%m-%d").date()
         d2 = datetime.strptime(check_out, "%Y-%m-%d").date()
         nights = (d2 - d1).days
+        if nights <= 0:
+          messages.error(request, "Invalid date range.")
+          return redirect(f"/hotel/detail/{hotel.id}/")
         # calculate total price
         total_price = room_type.base_price * nights
 
@@ -118,10 +122,7 @@ def Hotel_Detail(request, id):
             guests=guests,
             total_price=total_price,
         )
-        if not room:
-           messages.error(request, "No rooms available for this type.")
-           return redirect(f"/booking/{Booking.id}/")    # or return redirect("booking_page")
-
+    
         # Update room availability
         room.is_available = False
         room.save()
